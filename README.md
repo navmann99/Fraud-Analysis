@@ -1,75 +1,47 @@
+Project XYZ
+
+**Project XYZ** is a comprehensive data analysis tool designed to streamline data exploration, analysis, and visualisation. The tool supports multiple data formats and provides an intuitive interface for both novice and expert data scientists.
+
 # ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-## Template Instructions
+## Dataset Content
 
-Welcome,
+* The dataset I used was the Synthetic Fraud Dataset from Kaggle. Here is this link for the Dataset: https://www.kaggle.com/datasets/samayashar/fraud-detection-transactions-dataset 
 
-This is the Code Institute student template for the three Data Analytics capstone projects. We have preinstalled all of the tools you need to get started. It's perfectly okay to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
+## Business Requirements
 
-You can safely delete the Template Instructions section of this README.md file and modify the remaining paragraphs for your own project. Please do read the Template Instructions at least once, though! It contains some important information about the IDE and the extensions we use.
+* Identify which transaction, behavioural and risk-score features are significantly associated with fraud.
+* Determine whether commonly assumed risk factors such as transaction type, location and time of day/weekend actually influence fraud rate or whether fraud risk is instead concentrated in a small number of stronger behavioural signals.
+* Build and compare classification models to determine whether combining risk indicators improves fraud prediction over relying on any single indicator alone.
+* Present findings through visualisations
 
-If you are working on the first capstone project, you can also delete `.python-version`, `.slugignore`, `Procfile` and `setup.sh` as they are only required for later dashboard projects. 
+## Hypothesis and how to validate?
 
-## How to use this repo
+H1: Transactions with more failed attempts in the past 7 days are more likely to be fraudulent
+* Validation: Compare Failed Transaction Count 7d between fraudulent and non-fraudulent transactions using a box plot and t-test
 
-1. Use this template to create your GitHub project repo. Click the **Use this template** button, then click **Create a new repository**.
+H2: Transactions with a higher risk score are more likely to be fraudulent
+* Validation: Compare Risk Score between fraudulent and non-fraudulent transactions using a box plot and t-test
 
-1. Copy the URL of your repository to your clipboard.
+H3: Combining risk score and failed transaction count predicts fraud more accurately than either alone
+* Validation: Compare model performance (AUC/precision-recall) using each feature individually vs combined
 
-1. In VS Code, select **File** -> **Open Folder**.
+H4: Certain transaction types are more commonly associated with fraud
+* Validation: Analyse fraud rates by transaction type using a bar chart
 
-1. Select your `vscode-projects` folder, then click the **Select Folder** button on Windows, or the **Open** button on Mac.
+H5: Certain locations have a higher incidence of fraud compare to others
+* Validation: Analyse fraud rates by location using a bar chart
 
-1. From the top menu in VS Code, select **Terminal** > **New Terminal** to open a new terminal.
+H6: Fraud is more likely to occur at certain times of the day or on weekends
+* Validation: Analyse fraud rates by hour of the day and weekend status using a time series/line chart
+## Project Plan
 
-1. In the terminal, type `git clone` followed by the URL of your GitHub repository. Then hit **Enter**. This command will download all the files in your GitHub repository into your vscode-projects folder.
+* Explore the raw dataset, assessed data quality, and identified which features were relevant to the business requirements.
+* ETL: Clean the raw data check for missing values, duplicates, incorrect data types, and outliers and engineer new features (e.g. hour of day and day of week from the transaction timestamp).
+* EDA: Analyse distributions and relationships between features and fraud, and tested six hypotheses using statistical methods (t-tests and chi-square tests).
+* Data Visualisation: Create plots mapped to each hypothesis and business requirement, and built an interactive Tableau dashboard for further exploration.
+* Modelling:  Build and compare two classification models (Logistic Regression and Random Forest) to predict fraud, using the features identified as significant during EDA.
 
-1. In VS Code, select **File** > **Open Folder** again.
+## The rationale to map the business requirements to the Data Visualisations
 
-1. This time, navigate to and select the folder for the project you just downloaded. Then, click **Select Folder**.
-
-1. A virtual environment is necessary when working with Python projects to ensure each project's dependencies are kept separate. You need to create your virtual environment, also called a venv, and then activate it whenever you return to your workspace.
-Click the gear icon in the lower left-hand corner of the screen to open the Manage menu and select **Command Palette** to open the VS Code command palette.
-
-1. In the command palette, type: *create environment* and select **Python: Create Environment…**
-
-1. Choose **Venv** from the dropdown list.
-
-1. Choose the Python version you installed earlier. Currently, we recommend Python 3.12.8
-
-1. **DO NOT** click the box next to `requirements.txt`; you need to complete additional steps before installing your dependencies. Click **OK**.
-
-1. You will see a `.venv` folder appear in the file explorer pane, indicating that the virtual environment has been created.
-
-1. **Important**: Note that the `.venv` folder is in the `.gitignore` file so that Git won't track it.
-
-1. Return to the terminal by clicking on the TERMINAL tab, or click on the **Terminal** menu and choose **New Terminal** if no terminal is currently open.
-
-1. In the terminal, use the command below to install your dependencies. This may take several minutes.
-
- ```console
- pip3 install -r requirements.txt
- ```
-
-1. Open the `jupyter_notebooks` directory, and click on the notebook you want to open.
-
-1. Click the **Kernel** button, then choose **Python Environments**.
-
-Note that the kernel says `Python 3.12.8` as it inherits from the venv, so it will be Python-3.12.8 if that is what is installed on your PC. To confirm this, you can use the command below in a notebook code cell.
-
-```console
-! python --version
-```
-
-## Deployment Reminders
-
-* The `.python-version`, `.slugignore`, `Procfile` and `setup.sh` files are necessary only if you are deploying a Streamlit app to Heroku as part of your submission for units 2 and 3. 
-* Set the `.python-version` Python version to a [Heroku-22](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack, currently supported version that most closely matches what you used in this project.
-* The project can be deployed to Heroku using the following steps.
-
-1. Log in to Heroku and create an App
-2. At the **Deploy** tab, select **GitHub** as the deployment method.
-3. Select your repository name and click **Search**. Once it is found, click **Connect**.
-4. Select the branch you want to deploy, then click **Deploy Branch**.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click the button **Open App** at the top of the page to access your App.
-6. If the slug size is too large, then add large files not required for the app to the `.slugignore` file.
+* List your business requirements and a rationale for mapping them to the Data Visualisations
