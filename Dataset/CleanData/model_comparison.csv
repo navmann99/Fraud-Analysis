@@ -1,0 +1,3 @@
+Model,AUC,Precision,Recall
+Logistic Regression,0.89,0.71,0.64
+Random Forest,1.0,1.0,1.0
