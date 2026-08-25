@@ -97,7 +97,7 @@ I also thought about fairness, particularly around location. It would have been 
 
 ## Key Findings & Insights
 
-Overall, fraud made up about 32% of the transactions in this dataset — much higher than you'd typically see in real life, but useful for running proper statistical tests.
+Overall, fraud made up about 32% of the transactions in this dataset  much higher than you'd typically see in real life but useful for running proper statistical tests.
 
 The two standout predictors were Risk_Score and Failed_Transaction_Count_7d. Both were strongly linked to fraud on their own, and combining them performed even better than either one individually — the combined model reached an AUC of 0.890, compared to just 0.740 for risk score alone and 0.803 for failed transactions alone. Two patterns stood out in particular: any transaction with 4 or more failed attempts in the past 7 days was fraudulent 100% of the time and any transaction with a risk score above 0.85 was fraudulent every single time too.
 
@@ -120,3 +120,14 @@ I built and compared two classification models to predict fraud: Logistic Regres
 Random Forest came out with a perfect AUC of 1.00, but I don't think that's actually a good sign here — it more likely means the model has learned the exact, artificially clean thresholds in this synthetic dataset (like the 100% fraud rate at 4+ failed transactions) rather than picking up on something that would genuinely hold up in messier real world data. For that reason, I'd recommend Logistic Regression instead. Its AUC of 0.89 is still strong its results are easier to interpret and it's much less likely to be over fitting.
 
 Looking at feature importance from the Random Forest model backs this up too — Failed_Transaction_Count_7d and Risk_Score together account for over 96% of what the model actually relies on with everything else (device, card type, location, authentication method) contributing almost nothing.
+## Dashboard Design
+
+I built the dashboard in Tableau Public
+
+1. **Overview** — key stats Total Transactions, Fraud Rate, Fraud Count, Average Transaction Amount and a pie chart showing the fraud vs genuine split.
+2. **Risk Signals** — the charts for H1 and H2 my two strongest findings.
+3. **Where & How** — the charts for H4 and H5 showing that transaction type and location didn't actually matter.
+4. **When** — the charts for H6, showing fraud doesn't really change by hour, day, or weekend.
+5. **Model Insights** — feature importance and model comparison charts, along with a note explaining why I'm cautious about Random Forest's perfect score.
+
+Each page has a short text callout summarising the main takeaway so someone could get the key point just from glancing at the page without needing to read through the notebooks.
