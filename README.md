@@ -57,7 +57,7 @@ H6: Fraud is more likely to occur at certain times of the day, on certain days o
 * Modelling: Built and compared two classification models (Logistic Regression and Random Forest) to predict fraud, using the features identified as significant during EDA.
 * Insights & Recommendations: Summarised the findings from the hypothesis testing and the model, and translated them into practical fraud prevention recommendations.
 
-A Kanban board was used to plan and track progress: [insert your GitHub Project board link]
+A Kanban board was used to plan and track progress: 
 
 **Project files are organised as followed:**
 * (Raw) Primary File: Dataset/Raw/synthetic_fraud_dataset.csv
@@ -65,7 +65,8 @@ A Kanban board was used to plan and track progress: [insert your GitHub Project 
 * Feature Importance File: Dataset/CleanData/feature_importance.csv
 * Model Comparison File: Dataset/CleanData/model_comparison.csv
 * Notebooks: jupyter_notebooks/01_ETL.ipynb, 02_EDA.ipynb, 03_Data_Visualisation.ipynb, 04_Modelling.ipynb
-* Tableau Dashboard: [insert your published Tableau Public link]
+
+* Tableau Dashboard: 
 
 ## The rationale to map the business requirements to the Data Visualisations
 
