@@ -94,3 +94,12 @@ One thing worth pointing out: several of the hypotheses I expected to matter (tr
 Since the dataset is fully synthetic and doesn't contain any real personal data, there weren't any actual privacy concerns to deal with here. That said if this kind of analysis were ever applied to real transaction data it would need proper data governance in place such as encryption, limiting who has access and complying with regulations like GDPR.
 
 I also thought about fairness, particularly around location. It would have been easy to assume certain cities are "riskier" for fraud, but my testing actually showed no significant difference in fraud rate across any of the five locations. That's a good reminder not to build fraud rules around assumptions that aren't backed up by the data, since doing so could unfairly single out certain groups or regions without real justification.
+## Key Findings
+
+Overall, fraud made up about 32% of the transactions in this dataset — much higher than you'd typically see in real life, but useful for running proper statistical tests.
+
+The two standout predictors were Risk_Score and Failed_Transaction_Count_7d. Both were strongly linked to fraud on their own, and combining them performed even better than either one individually — the combined model reached an AUC of 0.890, compared to just 0.740 for risk score alone and 0.803 for failed transactions alone. Two patterns stood out in particular: any transaction with 4 or more failed attempts in the past 7 days was fraudulent 100% of the time and any transaction with a risk score above 0.85 was fraudulent every single time too.
+
+Everything else I tested  transaction type, location, hour of day, day of week, and weekend status showed no link to fraud at all. That was surprising going in since I expected at least location or time of day to show something.
+
+When it came to modelling Random Forest scored a perfect AUC of 1.00 which sounds great but is actually a red flag rather than a win it likely means the model picked up on how clean and rule based this synthetic dataset is rather than learning something that would hold up on messier, real world data. Logistic Regression with an AUC of 0.89 is the model I'd actually trust more.
