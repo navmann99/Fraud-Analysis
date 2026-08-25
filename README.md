@@ -94,7 +94,8 @@ One thing worth pointing out: several of the hypotheses I expected to matter (tr
 Since the dataset is fully synthetic and doesn't contain any real personal data, there weren't any actual privacy concerns to deal with here. That said if this kind of analysis were ever applied to real transaction data it would need proper data governance in place such as encryption, limiting who has access and complying with regulations like GDPR.
 
 I also thought about fairness, particularly around location. It would have been easy to assume certain cities are "riskier" for fraud, but my testing actually showed no significant difference in fraud rate across any of the five locations. That's a good reminder not to build fraud rules around assumptions that aren't backed up by the data, since doing so could unfairly single out certain groups or regions without real justification.
-## Key Findings
+
+## Key Findings & Insights
 
 Overall, fraud made up about 32% of the transactions in this dataset — much higher than you'd typically see in real life, but useful for running proper statistical tests.
 
@@ -103,3 +104,19 @@ The two standout predictors were Risk_Score and Failed_Transaction_Count_7d. Bot
 Everything else I tested  transaction type, location, hour of day, day of week, and weekend status showed no link to fraud at all. That was surprising going in since I expected at least location or time of day to show something.
 
 When it came to modelling Random Forest scored a perfect AUC of 1.00 which sounds great but is actually a red flag rather than a win it likely means the model picked up on how clean and rule based this synthetic dataset is rather than learning something that would hold up on messier, real world data. Logistic Regression with an AUC of 0.89 is the model I'd actually trust more.
+
+## Prevention Measures
+
+Based on the analysis this is what I would recommend 
+
+* Flag any transaction with a risk score above 0.85 for manual review in this dataset that threshold was fraud 100% of the time.
+* Apply extra verification steps for accounts that hit 4 or more failed transactions within a 7-day window, since this was another clean, reliable warning sign.
+* Don't build fraud rules around transaction type, location or timing as none of these showed any real link to fraud in this dataset
+
+## Model
+
+I built and compared two classification models to predict fraud: Logistic Regression and Random Forest, both using a scikit-learn pipeline with one hot encoding to handle the categorical columns.
+
+Random Forest came out with a perfect AUC of 1.00, but I don't think that's actually a good sign here — it more likely means the model has learned the exact, artificially clean thresholds in this synthetic dataset (like the 100% fraud rate at 4+ failed transactions) rather than picking up on something that would genuinely hold up in messier real world data. For that reason, I'd recommend Logistic Regression instead. Its AUC of 0.89 is still strong its results are easier to interpret and it's much less likely to be over fitting.
+
+Looking at feature importance from the Random Forest model backs this up too — Failed_Transaction_Count_7d and Risk_Score together account for over 96% of what the model actually relies on with everything else (device, card type, location, authentication method) contributing almost nothing.
