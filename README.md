@@ -49,12 +49,42 @@ H6: Fraud is more likely to occur at certain times of the day, on certain days o
 
 ## Project Plan
 
-* Explore the raw dataset, assessed data quality, and identified which features were relevant to the business requirements.
-* ETL: Clean the raw data check for missing values, duplicates, incorrect data types, and outliers and engineer new features (e.g. hour of day and day of week from the transaction timestamp).
-* EDA: Analyse distributions and relationships between features and fraud, and tested six hypotheses using statistical methods (t-tests and chi-square tests).
-* Data Visualisation: Create plots mapped to each hypothesis and business requirement, and built an interactive Tableau dashboard for further exploration.
-* Modelling:  Build and compare two classification models (Logistic Regression and Random Forest) to predict fraud, using the features identified as significant during EDA.
+* Business Understanding: Defined the fraud detection objectives and identified the key metrics relevant to the business requirements.
+* Data Understanding: Explored the raw dataset, assessed data quality, and identified which features were relevant to the business requirements.
+* ETL: Cleaned the raw data, checked for missing values, duplicates, incorrect data types, and outliers, and engineered new features (e.g. hour of day and day of week from the transaction timestamp).
+* EDA: Analysed distributions and relationships between features and fraud, and tested six hypotheses using statistical methods (t-tests, chi-square tests, and ANOVA).
+* Data Visualisation: Created plots mapped to each hypothesis and business requirement, and built an interactive Tableau dashboard for further exploration.
+* Modelling: Built and compared two classification models (Logistic Regression and Random Forest) to predict fraud, using the features identified as significant during EDA.
+* Insights & Recommendations: Summarised the findings from the hypothesis testing and the model, and translated them into practical fraud prevention recommendations.
+
+A Kanban board was used to plan and track progress: [insert your GitHub Project board link]
+
+**Project files are organised as followed:**
+* (Raw) Primary File: Dataset/Raw/synthetic_fraud_dataset.csv
+* (Cleaned) Transformed File: Dataset/CleanData/cleaned_fraud_dataset.csv
+* Feature Importance File: Dataset/CleanData/feature_importance.csv
+* Model Comparison File: Dataset/CleanData/model_comparison.csv
+* Notebooks: jupyter_notebooks/01_ETL.ipynb, 02_EDA.ipynb, 03_Data_Visualisation.ipynb, 04_Modelling.ipynb
+* Tableau Dashboard: [insert your published Tableau Public link]
 
 ## The rationale to map the business requirements to the Data Visualisations
 
-* List your business requirements and a rationale for mapping them to the Data Visualisations
+**Identify which transaction, behavioural and risk-score features are significantly associated with fraud** — box plots of Risk_Score and Failed_Transaction_Count_7d by Fraud_Label plus a supporting bar chart showing fraud rate climbing sharply at 4+ failed transactions.
+ 
+ **Determine whether commonly assumed risk factors actually influence fraud rate** — bar charts of fraud rate by Transaction_Type and Location and charts showing fraud rate by hour, weekend status, and day of week.
+ 
+ **Build and compare classification models** — a feature importance chart from the Random Forest model, and a model comparison chart (AUC) for Logistic Regression vs Random Forest.
+ 
+ **Translate findings into practical recommendations** — the Tableau dashboard pulls the strongest findings together into one interactive view with text callouts summarising each key insight for non-technical readers.
+ 
+ **Present findings for both technical and non-technical audiences** — the notebook plots with statistical test results alongside them serve the technical side, while the Tableau dashboard serves the non-technical side, letting the reader explore the data themselves.
+ 
+ ## Analysis Techniques Used
+
+I used mean, median and standard deviation to compare fraud and genuine transactions across the key numeric variables. To test whether the differences I found were actually significant I ran independent t-tests on the numeric features (H1, H2, and hour for H6) chi-square tests on the categorical ones (H4, H5, and weekend status for H6) and a one-way ANOVA to check for a pattern across the individual days of the week.
+
+I also looked at how all the numeric features correlated with fraud, to get an overall picture before diving into each hypothesis individually.
+
+For the machine learning side I built and compared two classification models Logistic Regression and Random Forest using a scikit-learn pipeline to handle the categorical columns through one-hot encoding.
+
+One thing worth pointing out: several of the hypotheses I expected to matter (transaction type, location, and the time-based ones) turned out not to be statistically significant at all. That was a genuinely useful finding in itself even though it wasn't the result I was expecting going in.
