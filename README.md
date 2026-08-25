@@ -131,3 +131,18 @@ I built the dashboard in Tableau Public
 5. **Model Insights** — feature importance and model comparison charts, along with a note explaining why I'm cautious about Random Forest's perfect score.
 
 Each page has a short text callout summarising the main takeaway so someone could get the key point just from glancing at the page without needing to read through the notebooks.
+
+## Limitations
+
+The dataset is synthetic so it doesn't reflect how real world fraud actually behaves.
+
+A few of the hypotheses I expected to matter transaction type, location, time of day, day of week  showed no significant link to fraud at all. That could be a genuine finding but it might also just be down to how the dataset was generated rather than a real world pattern.
+
+The clean thresholds I found for Failed_Transaction_Count_7d and Risk_Score (fraud jumping to exactly 100% past a certain point) are also a bit too tidy to be realistic  real fraud data is usually noisier than this. That's also why I'm cautious about Random Forest's perfect AUC score  it's more likely a sign of overfitting to this dataset's artificially clean patterns than genuine predictive skill.
+## Development Roadmap
+
+* Test the same hypotheses against a real (non-synthetic) fraud dataset to see whether the clean patterns found here like the 100% fraud rate at 4+ failed transactions  hold up against messier, real-world data.
+* Explore additional behavioural features beyond Risk_Score and Failed_Transaction_Count_7d such as transaction velocity or spending pattern deviation, to see if they add further predictive power.
+* Investigate the Random Forest's perfect AUC more closely using techniques like cross-validation to confirm whether it's genuinely overfitting or whether the dataset really is this clean-cut.
+* Build out the model comparison further, testing additional algorithms like decision trees or gradient boosting, rather than just Logistic Regression and Random Forest.
+* Improve my confidence with Tableau specifically I relied on trial and error quite heavily for the dashboard and would like to be able to build one more independently and efficiently next time.
