@@ -88,3 +88,9 @@ I also looked at how all the numeric features correlated with fraud, to get an o
 For the machine learning side I built and compared two classification models Logistic Regression and Random Forest using a scikit-learn pipeline to handle the categorical columns through one-hot encoding.
 
 One thing worth pointing out: several of the hypotheses I expected to matter (transaction type, location, and the time-based ones) turned out not to be statistically significant at all. That was a genuinely useful finding in itself even though it wasn't the result I was expecting going in.
+
+## Ethical Considerations
+
+Since the dataset is fully synthetic and doesn't contain any real personal data, there weren't any actual privacy concerns to deal with here. That said if this kind of analysis were ever applied to real transaction data it would need proper data governance in place such as encryption, limiting who has access and complying with regulations like GDPR.
+
+I also thought about fairness, particularly around location. It would have been easy to assume certain cities are "riskier" for fraud, but my testing actually showed no significant difference in fraud rate across any of the five locations. That's a good reminder not to build fraud rules around assumptions that aren't backed up by the data, since doing so could unfairly single out certain groups or regions without real justification.
