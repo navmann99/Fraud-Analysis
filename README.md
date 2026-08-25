@@ -146,3 +146,22 @@ The clean thresholds I found for Failed_Transaction_Count_7d and Risk_Score (fra
 * Investigate the Random Forest's perfect AUC more closely using techniques like cross-validation to confirm whether it's genuinely overfitting or whether the dataset really is this clean-cut.
 * Build out the model comparison further, testing additional algorithms like decision trees or gradient boosting, rather than just Logistic Regression and Random Forest.
 * Improve my confidence with Tableau specifically I relied on trial and error quite heavily for the dashboard and would like to be able to build one more independently and efficiently next time.
+
+## AI Assistance
+
+* I used Claude AI mainly for the machine learning section, to help me understand concepts like classification models and how to interpret metrics like AUC and precision recall.
+* It helped me debug specific errors such as the pingouin `p-val`/`p_val` version mismatch and various Tableau issues around fields defaulting to Sum instead of Count.
+* I used it a little for Tableau troubleshooting too working through some early issues with the dashboard.
+* I found it most useful for explaining why a particular test or approach was appropriate, rather than just giving me code to copy  that helped the statistics genuinely make sense rather than just following instructions.
+* I mainly used it as a guide to check I was going in the right direction rather than relying on it to do the work for me.
+
+## Main Data Analysis Libraries
+
+* Pandas — used throughout ETL, EDA, and Modelling
+* Numpy — numerical operations
+* Matplotlib - charts in the EDA and Data Visualisation  
+* Seaborn — charts in the EDA and Data Visualisation 
+* Scipy — t-tests and ANOVA
+* Pingouin — normality checks, t-tests, chi-square tests, and ANOVA
+* Scikit-learn — Logistic Regression, Random Forest, pipelines, and evaluation metrics
+* Tableau Public — interactive dashboard
