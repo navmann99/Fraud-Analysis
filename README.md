@@ -140,9 +140,17 @@ The dataset is synthetic so it doesn't reflect how real world fraud actually beh
 A few of the hypotheses I expected to matter transaction type, location, time of day, day of week  showed no significant link to fraud at all. That could be a genuine finding but it might also just be down to how the dataset was generated rather than a real world pattern.
 
 The clean thresholds I found for Failed_Transaction_Count_7d and Risk_Score (fraud jumping to exactly 100% past a certain point) are also a bit too tidy to be realistic  real fraud data is usually noisier than this. That's also why I'm cautious about Random Forest's perfect AUC score  it's more likely a sign of overfitting to this dataset's artificially clean patterns than genuine predictive skill.
+## Bugs and Fixes
+
+* Ran into a version mismatch with the pingouin library a column name I was told to use (`p-val`) had actually changed to `p_val` in the version I had installed, which threw a KeyError until I tracked down the naming change.
+* My CSV export for feature importance came through into Tableau with generic column names (F1, F2) instead of proper headers since the original pandas Series didn't have named columns when exported I fixed this by renaming the columns directly in Tableau's Data Source tab.
+* Several of my Tableau charts kept defaulting to Sum instead of Count or showing as one solid bar/circle instead of splitting by category  this was usually because a field had landed as a continuous/aggregated measure rather than a discrete dimension and converting it fixed the issue each time.
+* My first attempt at a pie chart in Tableau showed far more than two colours and lots of small mixed-up slices this turned out to be caused by extra fields sitting on the Detail shelf that I hadn't noticed splitting the pie into many tiny segments instead of two clean ones.
+* Tableau's automatic geocoding couldn't correctly plot all five of my city locations on a map  only one displayed correctly. I tried creating calculated fields with manual latitude/longitude coordinates as a workaround.
+
 ## Development Roadmap
 
-* Test the same hypotheses against a real (non-synthetic) fraud dataset to see whether the clean patterns found here like the 100% fraud rate at 4+ failed transactions  hold up against messier, real-world data.
+* Test the same hypotheses against a real (non-synthetic) fraud dataset to see whether the clean patterns found here like the 100% fraud rate at 4+ failed transactions  hold up against messier, real world data.
 * Explore additional behavioural features beyond Risk_Score and Failed_Transaction_Count_7d such as transaction velocity or spending pattern deviation, to see if they add further predictive power.
 * Investigate the Random Forest's perfect AUC more closely using techniques like cross-validation to confirm whether it's genuinely overfitting or whether the dataset really is this clean-cut.
 * Build out the model comparison further, testing additional algorithms like decision trees or gradient boosting, rather than just Logistic Regression and Random Forest.
