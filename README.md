@@ -1,6 +1,6 @@
-Project XYZ
+# Fraud Detection Project
 
-**Project XYZ** is a comprehensive data analysis tool designed to streamline data exploration, analysis, and visualisation. The tool supports multiple data formats and provides an intuitive interface for both novice and expert data scientists.
+**Fraud Detection Analytics Project** is a data analysis tool designed to identify the transaction, behavioural, and risk-score characteristics most associated with fraudulent activity. The project explores a synthetic transaction dataset through statistical hypothesis testing and machine learning, and presents the findings through an interactive Tableau dashboard
 
 # ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
@@ -145,7 +145,7 @@ The clean thresholds I found for Failed_Transaction_Count_7d and Risk_Score (fra
 * Ran into a version mismatch with the pingouin library a column name I was told to use (`p-val`) had actually changed to `p_val` in the version I had installed, which threw a KeyError until I tracked down the naming change.
 * My CSV export for feature importance came through into Tableau with generic column names (F1, F2) instead of proper headers since the original pandas Series didn't have named columns when exported I fixed this by renaming the columns directly in Tableau's Data Source tab.
 * Several of my Tableau charts kept defaulting to Sum instead of Count or showing as one solid bar/circle instead of splitting by category  this was usually because a field had landed as a continuous/aggregated measure rather than a discrete dimension and converting it fixed the issue each time.
-* My first attempt at a pie chart in Tableau showed far more than two colours and lots of small mixed-up slices this turned out to be caused by extra fields sitting on the Detail shelf that I hadn't noticed splitting the pie into many tiny segments instead of two clean ones.
+* My first attempt at a pie chart in Tableau showed far more than two colours and lots of small mixed up slices this turned out to be caused by extra fields sitting on the Detail shelf that I hadn't noticed splitting the pie into many tiny segments instead of two clean ones.
 * Tableau's automatic geocoding couldn't correctly plot all five of my city locations on a map  only one displayed correctly. I tried creating calculated fields with manual latitude/longitude coordinates as a workaround.
 
 ## Development Roadmap
